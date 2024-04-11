@@ -1,0 +1,10 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - if [ "$CODEBUILD_WEBHOOK_EVENT" == "PULL_REQUEST_MERGED" ]; then
+          aws s3 cp index.html s3://luit-green-april-2024-prod --acl public-read;
+        else
+          aws s3 cp index.html s3://luit-green-april-2024-beta --acl public-read;
+        fi
